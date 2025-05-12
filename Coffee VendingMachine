@@ -1,0 +1,33 @@
+package vendingmachine;
+import coffee.Coffee;
+import inventory.Inventory;
+import vendingmachinestate.VendingMachineState;
+
+public abstract class CoffeeVendingMachine {
+    protected static VendingMachine instance;
+    public Inventory inventory;
+    public VendingMachineState selectState;
+    public VendingMachineState insertCoinState;
+    public VendingMachineState dispenseState;
+    public VendingMachineState returnChangeState;
+    protected VendingMachineState currentState;
+    protected Coffee selectedCoffee;
+    protected double totalAmount;
+
+    public abstract void selectCoffee(Coffee coffee);
+    public abstract void insertCash(int cash);
+    public abstract void dispenseCoffee();
+    public abstract void provideChange();
+    public abstract void displayAvailableCoffee();
+    public abstract void setSelectedCoffee(Coffee selectedCoffee);
+
+    public abstract Coffee getSelectedCoffee();
+
+    public abstract void setCurrentState(VendingMachineState currentState);
+
+    public abstract void addCash(double cash);
+
+    public abstract void resetAmount();
+
+    public abstract double getTotalAmount();
+}
