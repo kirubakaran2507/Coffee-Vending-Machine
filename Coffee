@@ -1,0 +1,22 @@
+package coffee;
+import java.util.List;
+
+public abstract class Coffee {
+    protected String name;
+    protected List<String> ingredients;
+    protected double price;
+
+    public Coffee(String name,List<String> ingredients, double price){
+        this.name = name;
+        this.ingredients = ingredients;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
