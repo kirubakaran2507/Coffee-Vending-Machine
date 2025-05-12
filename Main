@@ -1,0 +1,24 @@
+package vendingmachine;
+import coffee.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        VendingMachine vendingMachine = VendingMachine.getInstance();
+
+        Coffee espresso = new Espresso("espresso",new ArrayList<>(List.of("yes")),150.00);
+        Coffee cappuccino = new Cappuccino("cappuccino",new ArrayList<>(List.of("bee")),200);
+        Coffee latte = new Latte("latte",new ArrayList<>(List.of("wee")),100);
+
+        vendingMachine.inventory.addCoffee(espresso,5);
+        vendingMachine.inventory.addCoffee(cappuccino,3);
+        vendingMachine.inventory.addCoffee(latte,5);
+
+        vendingMachine.selectCoffee(espresso);
+        vendingMachine.insertCash(100);
+        vendingMachine.insertCash(50);
+        vendingMachine.dispenseCoffee();
+        vendingMachine.provideChange();
+        vendingMachine.displayAvailableCoffee();
+    }
+}
