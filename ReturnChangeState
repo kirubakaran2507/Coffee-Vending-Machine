@@ -1,0 +1,42 @@
+package vendingmachinestate;
+
+import coffee.Coffee;
+import vendingmachine.VendingMachine;
+
+public class ReturnChangeState implements VendingMachineState{
+    VendingMachine vendingMachine;
+
+    public ReturnChangeState(VendingMachine vendingMachine){
+        this.vendingMachine = vendingMachine;
+    }
+
+    @Override
+    public void selectCoffee(Coffee coffee) {
+        System.out.println("Coffee selected already");
+    }
+
+    @Override
+    public void insertCash(double cash) {
+        System.out.println("Coin inserted");
+    }
+
+    @Override
+    public void dispenseCoffee() {
+        System.out.println("Coffee dispensed. collect the returned change");
+    }
+
+    @Override
+    public synchronized void returnChange() {
+        double change = vendingMachine.getTotalAmount()-vendingMachine.getSelectedCoffee().getPrice();
+
+        if (change>0){
+            System.out.println("Change returned "+change);
+        }
+        else {
+            System.out.println("No change to return");
+        }
+        vendingMachine.resetAmount();
+        vendingMachine.setCurrentState(vendingMachine.selectState);
+        vendingMachine.setSelectedCoffee(null);
+    }
+}
