@@ -1,0 +1,33 @@
+package inventory;
+import coffee.Coffee;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class Inventory {
+    private final Map<Coffee, Integer> coffeeMap;
+
+    public Inventory(){
+        coffeeMap = new ConcurrentHashMap<>();
+    }
+
+    public void addCoffee(Coffee coffee,int quantity){
+        coffeeMap.put(coffee,quantity);
+    }
+
+    public boolean isCoffeeAvailable(Coffee coffee){
+        return  (coffeeMap.containsKey(coffee) && coffeeMap.get(coffee)>0);
+    }
+    public void updateQuantity(Coffee coffee){
+        coffeeMap.put(coffee,coffeeMap.get(coffee)-1);
+    }
+
+    public void displayAvailableCoffee(){
+        System.out.println("Currently Available Coffees");
+        for (Map.Entry<Coffee,Integer> coffee : coffeeMap.entrySet()){
+            if (coffee.getValue()>0){
+                System.out.println("Coffee "+coffee.getKey().getName()+" available, Quantity : "+coffee.getValue());
+            }
+        }
+        System.out.println("------------------------------------------------------------------");
+    }
+}
