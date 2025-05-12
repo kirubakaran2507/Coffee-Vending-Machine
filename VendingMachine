@@ -1,0 +1,73 @@
+package vendingmachine;
+
+import coffee.Coffee;
+import inventory.Inventory;
+import vendingmachinestate.*;
+
+public class VendingMachine extends CoffeeVendingMachine{
+    private VendingMachine(){
+        inventory = new Inventory();
+        selectState = new SelectState(this);
+        insertCoinState = new InsertCoinState(this);
+        dispenseState = new DispenseState(this);
+        returnChangeState = new ReturnChangeState(this);
+        currentState = selectState;
+        totalAmount = 0.0;
+    }
+
+    public static VendingMachine getInstance(){
+        if (instance==null){
+            instance = new VendingMachine();
+        }
+        return instance;
+    }
+
+    @Override
+    public synchronized void selectCoffee(Coffee coffee) {
+        currentState.selectCoffee(coffee);
+    }
+
+    @Override
+    public synchronized void insertCash(int cash) {
+        currentState.insertCash(cash);
+    }
+
+    @Override
+    public synchronized void dispenseCoffee() {
+        currentState.dispenseCoffee();
+    }
+
+    @Override
+    public synchronized void provideChange() {
+        currentState.returnChange();
+    }
+
+    @Override
+    public void displayAvailableCoffee() {
+        inventory.displayAvailableCoffee();
+    }
+
+    public void setSelectedCoffee(Coffee selectedCoffee) {
+        this.selectedCoffee = selectedCoffee;
+    }
+
+    public Coffee getSelectedCoffee() {
+        return selectedCoffee;
+    }
+
+    public void setCurrentState(VendingMachineState currentState) {
+        this.currentState = currentState;
+    }
+
+    public void addCash(double cash) {
+        totalAmount += cash;
+    }
+
+    public void resetAmount(){
+        totalAmount = 0.0;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+}
