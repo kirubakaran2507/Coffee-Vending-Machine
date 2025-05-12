@@ -1,0 +1,39 @@
+package vendingmachinestate;
+
+import coffee.Coffee;
+import vendingmachine.VendingMachine;
+
+public class SelectState implements VendingMachineState{
+    VendingMachine vendingMachine;
+
+    public SelectState(VendingMachine vendingMachine){
+        this.vendingMachine = vendingMachine;
+    }
+
+    @Override
+    public synchronized void selectCoffee(Coffee coffee) {
+        if (vendingMachine.inventory.isCoffeeAvailable(coffee)){
+            vendingMachine.setSelectedCoffee(coffee);
+            vendingMachine.setCurrentState(vendingMachine.insertCoinState);
+            System.out.println("Coffee selected "+coffee.getName());
+        }
+        else {
+            System.out.println("Coffee not available "+coffee.getName());
+        }
+    }
+
+    @Override
+    public void insertCash(double cash) {
+        System.out.println("Select coffee first");
+    }
+
+    @Override
+    public void dispenseCoffee() {
+        System.out.println("Select coffee first");
+    }
+
+    @Override
+    public void returnChange() {
+        System.out.println("Select coffee first");
+    }
+}
