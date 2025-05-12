@@ -1,0 +1,10 @@
+package vendingmachinestate;
+
+import coffee.Coffee;
+
+public interface VendingMachineState {
+    void selectCoffee(Coffee coffee);
+    void insertCash(double cash);
+    void dispenseCoffee();
+    void returnChange();
+}
