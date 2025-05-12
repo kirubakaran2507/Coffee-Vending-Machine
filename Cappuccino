@@ -1,0 +1,9 @@
+package coffee;
+import java.util.List;
+
+public class Cappuccino extends Coffee{
+
+    public Cappuccino(String name,List<String> ingredients, double price) {
+        super(name,ingredients, price);
+    }
+}
